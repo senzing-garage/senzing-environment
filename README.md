@@ -267,7 +267,7 @@ The following examples require initialization described in
 #### Senzing project work-around (Senzing 1.x.x only)
 
 Currently Senzing project directories contain symbolic links that do not work within docker containers.
-The following instructions replace the symbolic links with actual directories. 
+The following instructions replace the symbolic links with actual directories.
 
 1. Backup existing directories.
    Example:
