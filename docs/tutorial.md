@@ -12,7 +12,7 @@ The second demonstration shows how to use independent docker containers within a
 These are "one-time tasks" which may already have been completed.
 
 1. The following software programs need to be installed:
-    1. [docker](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-docker.md)
+    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-docker.md)
 
 ## Demonstrations
 
@@ -28,8 +28,8 @@ These are "one-time tasks" which may already have been completed.
 Quick start demonstrations.
 See:
 
-1. [Quick Start for Linux](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/quickstart-linux.md)
-1. [Quick Start for macOS](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/quickstart-macos.md)
+1. [Quick Start for Linux](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/quickstart-linux.md)
+1. [Quick Start for macOS](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/quickstart-macos.md)
 
 ## Demonstration 2
 
@@ -121,7 +121,7 @@ See:
 ### Bring up Docker formation
 
 This Docker formation uses the docker-compose YAML file described in
-[docker-compose-rabbitmq-postgresql](https://github.com/Senzing/docker-compose-demo/tree/master/docs/docker-compose-rabbitmq-postgresql#view-data).
+[docker-compose-rabbitmq-postgresql](https://github.com/Senzing/docker-compose-demo/tree/main/docs/docker-compose-rabbitmq-postgresql#view-data).
 
 1. View `docker-setupEnv`.
    Example:
@@ -163,7 +163,7 @@ This Docker formation uses the docker-compose YAML file described in
         export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
         ```
 
-    1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/clone-repository.md) to install the Git repository.
+    1. Follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md) to install the Git repository.
 
 1. Bring up docker formation.
    Example:
@@ -177,11 +177,11 @@ This Docker formation uses the docker-compose YAML file described in
 
 ### View data
 
-1. [View](https://github.com/Senzing/docker-compose-demo/tree/master/docs/docker-compose-rabbitmq-postgresql#view-data)
+1. [View](https://github.com/Senzing/docker-compose-demo/tree/main/docs/docker-compose-rabbitmq-postgresql#view-data)
    data in different phases of the data flow:
     1. [RabbitMQ](http://localhost:15672) (username: user  password: bitnami)
     1. [PostgreSQL](http://localhost:9171) (username: postgres password: postgres)
-    1. [Senzing API](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml)
+    1. [Senzing API](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/main/senzing-rest-api.yaml)
     1. [Entity search webapp](http://localhost:8251/)
     1. [Jupyter notebooks](http://localhost:9178/)
     1. [X-Term](http://localhost:8254/) for Senzing command line tools
@@ -216,10 +216,10 @@ Depending on the distribution of Linux, there are different ways of installing S
 
 1. For installation on Red Hat, CentOS, openSuse and
    [others](https://en.wikipedia.org/wiki/List_of_Linux_distributions#RPM-based).
-    1. Visit to [How to install Senzing API - CentOS](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-senzing-api.md#centos).
+    1. Visit to [How to install Senzing API - CentOS](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-senzing-api.md#centos).
 1. For installation on Debian, Ubuntu and
    [others](https://en.wikipedia.org/wiki/List_of_Linux_distributions#Debian-based).
-    1. Visit to [How to install Senzing API - Ubuntu](https://github.com/Senzing/knowledge-base/blob/master/HOWTO/install-senzing-api.md#ubuntu).
+    1. Visit to [How to install Senzing API - Ubuntu](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-senzing-api.md#ubuntu).
 
 ### Create third Senzing project
 
@@ -239,7 +239,7 @@ Depending on the distribution of Linux, there are different ways of installing S
 
 ### Identify host IP address
 
-1. :pencil2: Set the [SENZING_DOCKER_HOST_IP_ADDR](https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md#senzing_docker_host_ip_addr) environment variable.
+1. :pencil2: Set the [SENZING_DOCKER_HOST_IP_ADDR](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md#senzing_docker_host_ip_addr) environment variable.
    Example:
 
     ```console
@@ -412,7 +412,7 @@ Depending on the distribution of Linux, there are different ways of installing S
     ~/senzing-demo-project-3/docker-bin/senzing-api-server.sh up
     ```
 
-1. View [Senzing API](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml)
+1. View [Senzing API](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/main/senzing-rest-api.yaml)
 
 ### Bring up Senzing Entity Search WebApp
 

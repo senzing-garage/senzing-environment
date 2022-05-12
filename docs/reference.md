@@ -78,7 +78,7 @@
 1. **Synopsis:**
 
    Brings up
-   [Portainer](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/portainer.md)
+   [Portainer](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/portainer.md)
    service.
    Portainer helps visualize and manage Docker.
 
@@ -103,7 +103,7 @@
 1. **Synopsis:**
 
    Brings up
-   [PostgreSQL](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/postgresql.md)
+   [PostgreSQL](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/postgresql.md)
    service.
 
 1. **Invocation:**
@@ -153,7 +153,7 @@
 
    The [Senzing REST API specification](https://github.com/Senzing/senzing-rest-api-specification)
    can be viewed with the online
-   [Swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml).
+   [Swagger UI](http://petstore.swagger.io/?url=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/main/senzing-rest-api.yaml).
 
    However, there may be an issue when interacting with the Senzing API Server.
    Modern web browsers use
@@ -391,7 +391,7 @@
 
 1. **Synopsis:**
 
-   Brings up [phpPgAdmin](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/phppgadmin.md) service.
+   Brings up [phpPgAdmin](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/phppgadmin.md) service.
 
 1. **Invocation:**
 
@@ -674,7 +674,7 @@
 
 1. **Synopsis:**
 
-   Brings up [Senzing UI](https://github.com/Senzing/knowledge-base/blob/master/WHATIS/swagger-ui.md) service.
+   Brings up [Senzing UI](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/swagger-ui.md) service.
 
 1. **Invocation:**
 
