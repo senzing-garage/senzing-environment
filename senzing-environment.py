@@ -25,7 +25,7 @@ __version__ = "1.3.0"  # See https://www.python.org/dev/peps/pep-0396/
 __date__ = '2020-04-23'
 __updated__ = '2022-05-05'
 
-SENZING_PRODUCT_ID = "5015"  # See https://github.com/Senzing/knowledge-base/blob/master/lists/senzing-product-ids.md
+SENZING_PRODUCT_ID = "5015"  # See https://github.com/Senzing/knowledge-base/blob/main/lists/senzing-product-ids.md
 log_format = '%(asctime)s %(message)s'
 
 # Lists from https://www.ietf.org/rfc/rfc1738.txt
@@ -703,7 +703,7 @@ def file_docker_environment_vars():
     """#! /usr/bin/env bash
 
 # For more information about the environment variables, see
-# https://github.com/Senzing/knowledge-base/blob/master/lists/environment-variables.md
+# https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md
 
 # NOTE:  SENZING_DOCKER_HOST_IP_ADDR cannot be "localhost",
 #        that would tell containers to look inside the container
@@ -3324,7 +3324,7 @@ function up {
 
     ${SENZING_SUDO} docker run \\
         --detach \\
-        --env URL=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/master/senzing-rest-api.yaml \\
+        --env URL=https://raw.githubusercontent.com/Senzing/senzing-rest-api-specification/main/senzing-rest-api.yaml \\
         --name ${CONTAINER_NAME} \\
         --publish ${CONTAINER_PORT}:8080 \\
         --restart always \\
