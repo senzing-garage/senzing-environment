@@ -958,7 +958,6 @@ fi
 """
     return 0
 
-
 # def file_docker_images_load():
 #     """#! /usr/bin/env bash
 #
@@ -985,7 +984,6 @@ fi
 # echo "${SENZING_HORIZONTAL_RULE}"
 # """
 #     return 0
-
 
 # def file_docker_images_save():
 #     """#! /usr/bin/env bash
@@ -1366,6 +1364,7 @@ fi
 """
     return 0
 
+
 def file_senzing_apt():
     """#!/usr/bin/env bash
 
@@ -1468,6 +1467,7 @@ else
 fi
 """
     return 0
+
 
 def file_senzing_console():
     """#!/usr/bin/env bash
@@ -3302,9 +3302,6 @@ else
 fi
 """
     return 0
-
-
-
 
 
 def file_swagger_ui():
