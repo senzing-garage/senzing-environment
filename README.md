@@ -19,6 +19,7 @@ docker-bin
 ├── portainer.sh
 ├── postgres.sh
 ├── senzing-api-server.sh
+├── senzing-apt.sh
 ├── senzing-console.sh
 ├── senzing-db2-driver-installer.sh
 ├── senzing-debug.sh
@@ -38,7 +39,6 @@ docker-bin
 ├── senzing-webapp-demo.sh
 ├── senzing-webapp.sh
 ├── senzing-xterm.sh
-├── senzing-yum.sh
 └── swagger-ui.sh
 ```
 
