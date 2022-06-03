@@ -21,9 +21,9 @@ import time
 from urllib.parse import urlparse, urlunparse
 
 __all__ = []
-__version__ = "1.3.0"  # See https://www.python.org/dev/peps/pep-0396/
+__version__ = "1.4.0"  # See https://www.python.org/dev/peps/pep-0396/
 __date__ = '2020-04-23'
-__updated__ = '2022-05-05'
+__updated__ = '2022-06-03'
 
 SENZING_PRODUCT_ID = "5015"  # See https://github.com/Senzing/knowledge-base/blob/main/lists/senzing-product-ids.md
 log_format = '%(asctime)s %(message)s'
@@ -723,6 +723,7 @@ export RABBITMQ_DIR=${{SENZING_PROJECT_DIR}}/var/rabbitmq
 export SENZING_DATABASE_URL={senzing_database_url}
 export SENZING_DATA_DIR=${{SENZING_PROJECT_DIR}}/data
 export SENZING_DATA_VERSION_DIR=${{SENZING_PROJECT_DIR}}/data
+export SENZING_DOCKER_CONTAINER_NAME_APT="${{SENZING_PROJECT_NAME}}-apt"
 export SENZING_DOCKER_CONTAINER_NAME_DB2_DRIVER_INSTALLER="${{SENZING_PROJECT_NAME}}-db2-driver-installer"
 export SENZING_DOCKER_CONTAINER_NAME_ENTITY_SEARCH_WEB_APP="${{SENZING_PROJECT_NAME}}-web-app"
 export SENZING_DOCKER_CONTAINER_NAME_INIT_CONTAINER="${{SENZING_PROJECT_NAME}}-init-container"
@@ -744,7 +745,6 @@ export SENZING_DOCKER_CONTAINER_NAME_STREAM_PRODUCER="${{SENZING_PROJECT_NAME}}-
 export SENZING_DOCKER_CONTAINER_NAME_SWAGGERAPI_SWAGGER_UI="${{SENZING_PROJECT_NAME}}-swagger-ui"
 export SENZING_DOCKER_CONTAINER_NAME_WEB_APP_DEMO="${{SENZING_PROJECT_NAME}}-web-app-demo"
 export SENZING_DOCKER_CONTAINER_NAME_XTERM="${{SENZING_PROJECT_NAME}}-xterm"
-export SENZING_DOCKER_CONTAINER_NAME_YUM="${{SENZING_PROJECT_NAME}}-yum"
 export SENZING_DOCKER_IMAGE_VERSION_APT=latest
 export SENZING_DOCKER_IMAGE_VERSION_DB2_DRIVER_INSTALLER=latest
 export SENZING_DOCKER_IMAGE_VERSION_ENTITY_SEARCH_WEB_APP=latest
@@ -765,7 +765,6 @@ export SENZING_DOCKER_IMAGE_VERSION_STREAM_PRODUCER=latest
 export SENZING_DOCKER_IMAGE_VERSION_SWAGGERAPI_SWAGGER_UI=latest
 export SENZING_DOCKER_IMAGE_VERSION_WEB_APP_DEMO=latest
 export SENZING_DOCKER_IMAGE_VERSION_XTERM=latest
-export SENZING_DOCKER_IMAGE_VERSION_YUM=latest
 export SENZING_DOCKER_PORT_ENTITY_SEARCH_WEB_APP=8251
 export SENZING_DOCKER_PORT_JUPYTER=9178
 export SENZING_DOCKER_PORT_PHPPGADMIN_HTTP=9171
@@ -785,6 +784,7 @@ export SENZING_ETC_DIR=${{SENZING_PROJECT_DIR}}/docker-etc
 export SENZING_G2_DIR=${{SENZING_PROJECT_DIR}}{senzing_project_dir_suffix}
 export SENZING_HORIZONTAL_RULE="=============================================================================="
 export SENZING_INPUT_URL="https://s3.amazonaws.com/public-read-access/TestDataSets/loadtest-dataset-1M.json"
+export SENZING_LOG_APT="${{SENZING_PROJECT_DIR}}/var/log/senzing-apt.log"
 export SENZING_LOG_DB2_DRIVER_INSTALLER="${{SENZING_PROJECT_DIR}}/var/log/senzing-db2-driver-installer.log"
 export SENZING_LOG_INIT_CONTAINER="${{SENZING_PROJECT_DIR}}/var/log/senzing-init-container.log"
 export SENZING_LOG_JUPYTER="${{SENZING_PROJECT_DIR}}/var/log/senzing-jupyter.log"
@@ -803,10 +803,9 @@ export SENZING_LOG_SSHD="${{SENZING_PROJECT_DIR}}/var/log/senzing-sshd.log"
 export SENZING_LOG_STREAM_LOADER="${{SENZING_PROJECT_DIR}}/var/log/senzing-stream-loader.log"
 export SENZING_LOG_STREAM_PRODUCER="${{SENZING_PROJECT_DIR}}/var/log/senzing-stream-producer.log"
 export SENZING_LOG_SWAGGERAPI_SWAGGER_UI="${{SENZING_PROJECT_DIR}}/var/log/swagger-ui.log"
-export SENZING_LOG_WEBAPP="${{SENZING_PROJECT_DIR}}/var/log/senzing-webapp.log"
 export SENZING_LOG_WEB_APP_DEMO="${{SENZING_PROJECT_DIR}}/var/log/senzing-webapp-demo.log"
+export SENZING_LOG_WEBAPP="${{SENZING_PROJECT_DIR}}/var/log/senzing-webapp.log"
 export SENZING_LOG_XTERM="${{SENZING_PROJECT_DIR}}/var/log/senzing-xterm.log"
-export SENZING_LOG_YUM="${{SENZING_PROJECT_DIR}}/var/log/senzing-yum.log"
 export SENZING_MSSQL_PARAMETERS=""
 # export SENZING_NETWORK_PARAMETER="--net senzing-up"
 export SENZING_OPT_IBM_DIR=${{SENZING_PROJECT_DIR}}/docker-db2
@@ -847,16 +846,15 @@ export DOCKER_IMAGE_NAMES_ALL=(
   "senzing/stream-producer:${{SENZING_DOCKER_IMAGE_VERSION_STREAM_PRODUCER}}"
   "senzing/web-app-demo:${{SENZING_DOCKER_IMAGE_VERSION_WEB_APP_DEMO}}"
   "senzing/xterm:${{SENZING_DOCKER_IMAGE_VERSION_XTERM}}"
-  "senzing/yum:${{SENZING_DOCKER_IMAGE_VERSION_YUM}}"
   "swaggerapi/swagger-ui:${{SENZING_DOCKER_IMAGE_VERSION_SWAGGERAPI_SWAGGER_UI}}"
 )
 
 export DOCKER_IMAGE_NAMES_WEBAPPDEMO=(
+  "senzing/apt:${{SENZING_DOCKER_IMAGE_VERSION_APT}}"
   "senzing/g2loader:${{SENZING_DOCKER_IMAGE_VERSION_G2LOADER}}"
   "senzing/init-container:${{SENZING_DOCKER_IMAGE_VERSION_INIT_CONTAINER}}"
   "senzing/senzing-console:${{SENZING_DOCKER_IMAGE_VERSION_SENZING_CONSOLE}}"
   "senzing/web-app-demo:${{SENZING_DOCKER_IMAGE_VERSION_WEB_APP_DEMO}}"
-  "senzing/yum:${{SENZING_DOCKER_IMAGE_VERSION_YUM}}"
 )
 
 export DOCKER_IMAGE_NAMES_REST=(
@@ -960,7 +958,6 @@ fi
 """
     return 0
 
-
 # def file_docker_images_load():
 #     """#! /usr/bin/env bash
 #
@@ -987,7 +984,6 @@ fi
 # echo "${SENZING_HORIZONTAL_RULE}"
 # """
 #     return 0
-
 
 # def file_docker_images_save():
 #     """#! /usr/bin/env bash
@@ -1060,7 +1056,6 @@ ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/stream-loader
 ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/stream-producer:${SENZING_DOCKER_IMAGE_VERSION_STREAM_PRODUCER}
 ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/web-app-demo:${SENZING_DOCKER_IMAGE_VERSION_WEB_APP_DEMO}
 ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/xterm:${SENZING_DOCKER_IMAGE_VERSION_XTERM}
-${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/yum:${SENZING_DOCKER_IMAGE_VERSION_YUM}
 ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/swaggerapi/swagger-ui:${SENZING_DOCKER_IMAGE_VERSION_SWAGGERAPI_SWAGGER_UI}
 
 echo "${SENZING_HORIZONTAL_RULE:0:2}"
@@ -1370,6 +1365,110 @@ fi
     return 0
 
 
+def file_senzing_apt():
+    """#!/usr/bin/env bash
+
+# --- Functions ---------------------------------------------------------------
+
+function up {
+    echo -ne "\033[2K${CONTAINER_NAME} status: starting...\r"
+
+    if [ "${CONTAINER_VERSION}" == "latest" ]
+    then
+        ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/apt:${CONTAINER_VERSION} >> ${CONTAINER_LOG} 2>&1
+    fi
+
+    # Remove symbolic links.
+
+    rm ${SENZING_G2_DIR}
+    rm ${SENZING_DATA_DIR}
+
+    # Download Senzing binaries.
+
+    ${SENZING_SUDO} docker run \\
+        --env SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \\
+        --interactive \\
+        --name ${CONTAINER_NAME} \\
+        --rm \\
+        --tty \\
+        --user $(id -u):$(id -g) \\
+        --volume ${SENZING_PROJECT_DIR}:/opt/senzing \\
+        ${SENZING_DOCKER_RUN_PARAMETERS_GLOBAL} \\
+        ${SENZING_DOCKER_RUN_PARAMETERS_APT} \\
+        ${SENZING_NETWORK_PARAMETER} \\
+        ${SENZING_PRIVILEGED_PARAMETER} \\
+        senzing/apt:${CONTAINER_VERSION} \\
+        >> ${CONTAINER_LOG} 2>&1
+
+    COUNTER=0
+    COUNTER_NOTICE=5
+    TIME_STRING=".."
+    CONTAINER_STATUS="$( docker container inspect -f '{{.State.Status}}' ${CONTAINER_NAME})"
+    while [ "${CONTAINER_STATUS}" != "running" ]; do
+        COUNTER=$((${COUNTER}+1))
+        if [ "${COUNTER}" -eq "${COUNTER_NOTICE}" ]; then
+            echo -ne "\033[2K"
+            echo ""
+            echo "To see what is happening behind-the-scenes, view the log at"
+            echo "${CONTAINER_LOG}"
+            echo "and/or run 'docker logs ${CONTAINER_NAME}'"
+            echo ""
+        fi
+        TIME_STRING="${TIME_STRING}."
+        echo -ne "\033[2K${CONTAINER_NAME} status: ${CONTAINER_STATUS}${TIME_STRING}\r"
+        sleep 5
+        CONTAINER_STATUS="$( docker container inspect -f '{{.State.Status}}' ${CONTAINER_NAME})"
+    done
+
+    # Create symbolic links to timestamped directories.
+
+    TIMESTAMP=$(date +%s)
+
+    pushd ${SENZING_PROJECT_DIR}
+    mv g2 g2.${TIMESTAMP}
+    ln -s g2.${TIMESTAMP} g2
+
+    mv data data-backup
+    mv data-backup/3.0.0 data.${TIMESTAMP}
+    rmdir data-backup
+    ln -s data.${TIMESTAMP} data
+    popd
+}
+
+function down {
+    ${SENZING_SUDO} docker stop ${CONTAINER_NAME} >> ${CONTAINER_LOG} 2>&1
+    ${SENZING_SUDO} docker rm   ${CONTAINER_NAME} >> ${CONTAINER_LOG} 2>&1
+}
+
+function usage {
+    echo "usage: $0 [up | down | restart]"
+    echo "For more information:"
+    echo "${SENZING_REFERENCE_URL}#senzing-apt"
+}
+
+# --- Main --------------------------------------------------------------------
+
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source ${SCRIPT_DIR}/docker-environment-vars.sh
+
+CONTAINER_LOG="${SENZING_LOG_APT}"
+CONTAINER_NAME="${SENZING_DOCKER_CONTAINER_NAME_APT}"
+CONTAINER_VERSION="${SENZING_DOCKER_IMAGE_VERSION_APT}"
+
+if [ "$1" == "up" ]; then
+    up
+elif [ "$1" == "down" ]; then
+    down
+elif [ "$1" == "restart" ]; then
+    down
+    up
+else
+    usage
+fi
+"""
+    return 0
+
+
 def file_senzing_console():
     """#!/usr/bin/env bash
 
@@ -1632,6 +1731,7 @@ echo "${SENZING_HORIZONTAL_RULE:0:2} ${SENZING_REFERENCE_URL}#senzing-down"
 echo "${SENZING_HORIZONTAL_RULE:0:2}"
 
 DOCKER_CONTAINERS=(
+    "${SENZING_DOCKER_CONTAINER_NAME_APT};${SENZING_LOG_APT}"
     "${SENZING_DOCKER_CONTAINER_NAME_DB2_DRIVER_INSTALLER};${SENZING_LOG_DB2_DRIVER_INSTALLER}"
     "${SENZING_DOCKER_CONTAINER_NAME_ENTITY_SEARCH_WEB_APP};${SENZING_LOG_WEBAPP}"
     "${SENZING_DOCKER_CONTAINER_NAME_INIT_CONTAINER};${SENZING_LOG_INIT_CONTAINER}"
@@ -1652,7 +1752,6 @@ DOCKER_CONTAINERS=(
     "${SENZING_DOCKER_CONTAINER_NAME_SWAGGERAPI_SWAGGER_UI};${SENZING_LOG_SWAGGERAPI_SWAGGER_UI}"
     "${SENZING_DOCKER_CONTAINER_NAME_WEB_APP_DEMO};${SENZING_LOG_WEB_APP_DEMO}"
     "${SENZING_DOCKER_CONTAINER_NAME_XTERM};${SENZING_LOG_XTERM}"
-    "${SENZING_DOCKER_CONTAINER_NAME_YUM};${SENZING_LOG_YUM}"
 )
 
 for DOCKER_CONTAINER in ${DOCKER_CONTAINERS[@]};
@@ -3205,110 +3304,6 @@ fi
     return 0
 
 
-def file_senzing_yum():
-    """#!/usr/bin/env bash
-
-# --- Functions ---------------------------------------------------------------
-
-function up {
-    echo -ne "\033[2K${CONTAINER_NAME} status: starting...\r"
-
-    if [ "${CONTAINER_VERSION}" == "latest" ]
-    then
-        ${SENZING_SUDO} docker pull ${SENZING_DOCKER_REGISTRY_URL}/senzing/yum:${CONTAINER_VERSION} >> ${CONTAINER_LOG} 2>&1
-    fi
-
-    # Remove symbolic links.
-
-    rm ${SENZING_G2_DIR}
-    rm ${SENZING_DATA_DIR}
-
-    # Download Senzing binaries.
-
-    ${SENZING_SUDO} docker run \\
-        --env SENZING_ACCEPT_EULA=${SENZING_ACCEPT_EULA} \\
-        --interactive \\
-        --name ${CONTAINER_NAME} \\
-        --rm \\
-        --tty \\
-        --user $(id -u):$(id -g) \\
-        --volume ${SENZING_PROJECT_DIR}:/opt/senzing \\
-        ${SENZING_DOCKER_RUN_PARAMETERS_GLOBAL} \\
-        ${SENZING_DOCKER_RUN_PARAMETERS_YUM} \\
-        ${SENZING_NETWORK_PARAMETER} \\
-        ${SENZING_PRIVILEGED_PARAMETER} \\
-        senzing/yum:${CONTAINER_VERSION} \\
-        >> ${CONTAINER_LOG} 2>&1
-
-    COUNTER=0
-    COUNTER_NOTICE=5
-    TIME_STRING=".."
-    CONTAINER_STATUS="$( docker container inspect -f '{{.State.Status}}' ${CONTAINER_NAME})"
-    while [ "${CONTAINER_STATUS}" != "running" ]; do
-        COUNTER=$((${COUNTER}+1))
-        if [ "${COUNTER}" -eq "${COUNTER_NOTICE}" ]; then
-            echo -ne "\033[2K"
-            echo ""
-            echo "To see what is happening behind-the-scenes, view the log at"
-            echo "${CONTAINER_LOG}"
-            echo "and/or run 'docker logs ${CONTAINER_NAME}'"
-            echo ""
-        fi
-        TIME_STRING="${TIME_STRING}."
-        echo -ne "\033[2K${CONTAINER_NAME} status: ${CONTAINER_STATUS}${TIME_STRING}\r"
-        sleep 5
-        CONTAINER_STATUS="$( docker container inspect -f '{{.State.Status}}' ${CONTAINER_NAME})"
-    done
-
-    # Create symbolic links to timestamped directories.
-
-    TIMESTAMP=$(date +%s)
-
-    pushd ${SENZING_PROJECT_DIR}
-    mv g2 g2.${TIMESTAMP}
-    ln -s g2.${TIMESTAMP} g2
-
-    mv data data-backup
-    mv data-backup/3.0.0 data.${TIMESTAMP}
-    rmdir data-backup
-    ln -s data.${TIMESTAMP} data
-    popd
-}
-
-function down {
-    ${SENZING_SUDO} docker stop ${CONTAINER_NAME} >> ${CONTAINER_LOG} 2>&1
-    ${SENZING_SUDO} docker rm   ${CONTAINER_NAME} >> ${CONTAINER_LOG} 2>&1
-}
-
-function usage {
-    echo "usage: $0 [up | down | restart]"
-    echo "For more information:"
-    echo "${SENZING_REFERENCE_URL}#senzing-yum"
-}
-
-# --- Main --------------------------------------------------------------------
-
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source ${SCRIPT_DIR}/docker-environment-vars.sh
-
-CONTAINER_LOG="${SENZING_LOG_YUM}"
-CONTAINER_NAME="${SENZING_DOCKER_CONTAINER_NAME_YUM}"
-CONTAINER_VERSION="${SENZING_DOCKER_IMAGE_VERSION_YUM}"
-
-if [ "$1" == "up" ]; then
-    up
-elif [ "$1" == "down" ]; then
-    down
-elif [ "$1" == "restart" ]; then
-    down
-    up
-else
-    usage
-fi
-"""
-    return 0
-
-
 def file_swagger_ui():
     """#!/usr/bin/env bash
 
@@ -3811,6 +3806,7 @@ def do_add_docker_support_linux(args):
         "portainer.sh": file_portainer,
         "postgres.sh": file_postgres,
         "senzing-api-server.sh": file_senzing_api_server,
+        "senzing-apt.sh": file_senzing_apt,
         "senzing-console.sh": file_senzing_console,
         "senzing-db2-driver-installer.sh": file_senzing_db2_driver_installer,
         "senzing-debug.sh": file_senzing_debug,
@@ -3830,7 +3826,6 @@ def do_add_docker_support_linux(args):
         "senzing-webapp-demo.sh": file_senzing_webapp_demo,
         "senzing-webapp.sh": file_senzing_webapp,
         "senzing-xterm.sh": file_senzing_xterm,
-        "senzing-yum.sh": file_senzing_yum,
         "swagger-ui.sh": file_swagger_ui
     }
 
@@ -3876,6 +3871,7 @@ def do_add_docker_support_macos(args):
         "portainer.sh": file_portainer,
         "postgres.sh": file_postgres,
         "senzing-api-server.sh": file_senzing_api_server,
+        "senzing-apt.sh": file_senzing_apt,
         "senzing-console.sh": file_senzing_console,
         "senzing-db2-driver-installer.sh": file_senzing_db2_driver_installer,
         "senzing-debug.sh": file_senzing_debug,
@@ -3895,7 +3891,6 @@ def do_add_docker_support_macos(args):
         "senzing-webapp-demo.sh": file_senzing_webapp_demo,
         "senzing-webapp.sh": file_senzing_webapp,
         "senzing-xterm.sh": file_senzing_xterm,
-        "senzing-yum.sh": file_senzing_yum,
         "swagger-ui.sh": file_swagger_ui
     }
 

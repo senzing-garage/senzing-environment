@@ -655,18 +655,18 @@
     ==============================================================================
     ```
 
-### senzing-yum
+### senzing-apt
 
 1. **Synopsis:**
 
-   Runs [docker-yum](https://github.com/Senzing/docker-yum) task.
+   Runs [docker-apt](https://github.com/Senzing/docker-apt) task.
 
 1. **Invocation:**
 
    Example:
 
     ```console
-    $ ./docker-bin/senzing-yum.sh up
+    $ ./docker-bin/senzing-apt.sh up
     :
     ```
 
