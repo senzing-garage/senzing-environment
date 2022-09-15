@@ -23,7 +23,7 @@ from urllib.parse import urlparse, urlunparse
 __all__ = []
 __version__ = "1.4.0"  # See https://www.python.org/dev/peps/pep-0396/
 __date__ = '2020-04-23'
-__updated__ = '2022-06-03'
+__updated__ = '2022-09-15'
 
 SENZING_PRODUCT_ID = "5015"  # See https://github.com/Senzing/knowledge-base/blob/main/lists/senzing-product-ids.md
 log_format = '%(asctime)s %(message)s'
@@ -2744,7 +2744,6 @@ function up {
         --env LC_CTYPE="en_us.utf8" \\
         --env SENZING_DATABASE_URL=${SENZING_DATABASE_URL} \\
         --env SENZING_DATA_SOURCE=TEST \\
-        --env SENZING_ENTITY_TYPE=GENERIC \\
         --env SENZING_RABBITMQ_HOST=${SENZING_DOCKER_HOST_IP_ADDR} \\
         --env SENZING_RABBITMQ_PASSWORD=${SENZING_RABBITMQ_PASSWORD} \\
         --env SENZING_RABBITMQ_PORT=${SENZING_DOCKER_PORT_RABBITMQ} \\
@@ -3430,7 +3429,6 @@ def log_environment_variables():
         "RABBITMQ_PASSWORD": "bitnami",
         "SENZING_DATA_SOURCE": "TEST",
         "SENZING_DATA_VERSION_DIR": "/opt/senzing/data/3.0.0",
-        "SENZING_ENTITY_TYPE": "GENERIC",
         "SENZING_ETC_DIR": "/etc/opt/senzing",
         "SENZING_G2_DIR": "/opt/senzing/g2",
         "SENZING_VAR_DIR": "/var/opt/senzing",
