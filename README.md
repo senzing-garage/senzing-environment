@@ -49,7 +49,6 @@ The function of each file can be seen in the
 
 1. [Preamble](#preamble)
     1. [Legend](#legend)
-1. [Related artifacts](#related-artifacts)
 1. [Expectations](#expectations)
 1. [Demonstrate using Command Line Interface](#demonstrate-using-command-line-interface)
     1. [Prerequisites for CLI](#prerequisites-for-cli)
@@ -61,15 +60,7 @@ The function of each file can be seen in the
     1. [Create Senzing project](#create-senzing-project)
     1. [Environment variables for Docker](#environment-variables-for-docker)
     1. [Run Docker container](#run-docker-container)
-1. [Develop](#develop)
-    1. [Prerequisites for development](#prerequisites-for-development)
-    1. [Clone repository](#clone-repository)
-1. [Examples](#examples)
-    1. [Examples of CLI](#examples-of-cli)
-    1. [Examples of Docker](#examples-of-docker)
-1. [Advanced](#advanced)
-    1. [Configuration](#configuration)
-1. [Errors](#errors)
+1. [Configuration](#configuration)
 1. [References](#references)
 
 ## Preamble
@@ -91,10 +82,6 @@ describing where we can improve.   Now on with the show...
    Perhaps it's an optional step.
 1. :pencil2: - A "pencil" icon means that the instructions may need modification before performing.
 1. :warning: - A "warning" icon means that something tricky is happening, so pay attention.
-
-## Related artifacts
-
-1. [DockerHub](https://hub.docker.com/r/senzing/senzing-environment)
 
 ## Expectations
 
@@ -151,7 +138,7 @@ These are "one-time tasks" which may already have been completed.
         ```
 
 1. :thinking: **Alternative:** The entire git repository can be downloaded by following instructions at
-   [Clone repository](#clone-repository)
+   [Clone repository](docs/development.md#clone-repository)
 
 ### Run command
 
@@ -172,7 +159,7 @@ These are "one-time tasks" which may already have been completed.
 These are "one-time tasks" which may already have been completed.
 
 1. The following software programs need to be installed:
-    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-docker.md)
+    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/docker.md)
 
 ### Docker volumes
 
@@ -235,84 +222,7 @@ If a Senzing project directory is needed, perform the following step.
 
 1. For more examples of use, see [Examples of Docker](#examples-of-docker).
 
-## Develop
-
-### Prerequisites for development
-
-:thinking: The following tasks need to be complete before proceeding.
-These are "one-time tasks" which may already have been completed.
-
-1. The following software programs need to be installed:
-    1. [git](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-git.md)
-
-### Clone repository
-
-For more information on environment variables,
-see [Environment Variables](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md).
-
-1. Set these environment variable values:
-
-    ```console
-    export GIT_ACCOUNT=senzing
-    export GIT_REPOSITORY=senzing-environment
-    export GIT_ACCOUNT_DIR=~/${GIT_ACCOUNT}.git
-    export GIT_REPOSITORY_DIR="${GIT_ACCOUNT_DIR}/${GIT_REPOSITORY}"
-    ```
-
-1. Using the environment variables values just set, follow steps in [clone-repository](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/clone-repository.md) to install the Git repository.
-
-## Examples
-
-### Examples of CLI
-
-The following examples require initialization described in
-[Demonstrate using Command Line Interface](#demonstrate-using-command-line-interface).
-
-#### Add docker support to Senzing project directory
-
-1. :pencil2: Identify Senzing Project directory.
-   Example:
-
-    ```console
-    export SENZING_PROJECT_DIR=~/senzing-project
-    ```
-
-1. :pencil2: Give the Senzing project a name.
-   The name is used as a prefix for docker containers.
-   Example:
-
-    ```console
-    export SENZING_PROJECT_NAME=senzing
-    ```
-
-1. Add docker support to Senzing project directory
-   Example:
-
-    ```console
-    senzing-environment.py add-docker-support \
-      --project-name ${SENZING_PROJECT_NAME} \
-      --project-dir ${SENZING_PROJECT_DIR}
-    ```
-
-#### Set environment for docker
-
-1. Set environment.
-   Example:
-
-    ```console
-    source ${SENZING_PROJECT_DIR}/docker-setupEnv
-    ```
-
-### Examples of Docker
-
-The following examples require initialization described in
-[Demonstrate using Docker](#demonstrate-using-docker).
-
-1. Visit [senzing-environment tutorial](docs/tutorial.md).
-
-## Advanced
-
-### Configuration
+## Configuration
 
 Configuration values specified by environment variable or command line parameter.
 
@@ -326,8 +236,10 @@ Configuration values specified by environment variable or command line parameter
 - **[SENZING_PROJECT_DIR](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md#senzing_project_dir)**
 - **[SENZING_PROJECT_NAME](https://github.com/Senzing/knowledge-base/blob/main/lists/environment-variables.md#senzing_project_name)**
 
-## Errors
-
-1. See [docs/errors.md](docs/errors.md).
-
 ## References
+
+1. [Development](docs/development.md)
+1. [Errors](docs/errors.md)
+1. [Examples](docs/examples.md)
+1. Related artifacts:
+    1. [DockerHub](https://hub.docker.com/r/senzing/senzing-environment)

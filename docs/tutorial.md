@@ -12,26 +12,16 @@ The second demonstration shows how to use independent docker containers within a
 These are "one-time tasks" which may already have been completed.
 
 1. The following software programs need to be installed:
-    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/install-docker.md)
+    1. [docker](https://github.com/Senzing/knowledge-base/blob/main/WHATIS/docker.md)
 
 ## Demonstrations
 
 1. [Demonstration 1](#demonstration-1)
-    1. Show how to
-1. [Demonstration 2](#demonstration-2)
     1. Bring up `docker-compose` formation.
-1. [Demonstration 3](#demonstration-3)
+1. [Demonstration 2](#demonstration-2)
     1. Show use of most `docker-bin` shell scripts.
 
 ## Demonstration 1
-
-Quick start demonstrations.
-See:
-
-1. [Quick Start for Linux](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/quickstart-linux.md)
-1. [Quick Start for macOS](https://github.com/Senzing/knowledge-base/blob/main/HOWTO/quickstart-macos.md)
-
-## Demonstration 2
 
 ### Create Docker support for second Senzing project
 
@@ -198,7 +188,7 @@ This Docker formation uses the docker-compose YAML file described in
       docker-compose --file resources/postgresql/docker-compose-rabbitmq-postgresql.yaml down
     ```
 
-## Demonstration 3
+## Demonstration 2
 
 This demonstration creates a local PostgreSQL database and RabbitMQ queue.
 It shows how to bring up individual Docker containers.
