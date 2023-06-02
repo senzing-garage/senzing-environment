@@ -1,5 +1,11 @@
 # senzing-environment
 
+## :no_entry: Deprecated
+
+Replaced by [senzinggo](https://github.com/Senzing/senzinggo)
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
 ## Synopsis
 
 The [senzing-environment.py](senzing-environment.py) program
